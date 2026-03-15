@@ -23,16 +23,19 @@ This workspace follows **modern enterprise frontend architecture patterns**:
 
 The system is composed of a **shell application** that dynamically loads **remote applications**.
 
-                ┌───────────────────────┐  
-                │      shell-host       │  
-                │   (application host)  │  
-                └───────────┬───────────┘  
-                            │  
-        ┌───────────────┬───────────────┬───────────────┐  
-        │               │               │               │  
+```
+                ┌───────────────────────┐
+                │      shell-host       │
+                │   (application host)  │
+                └───────────┬───────────┘
+                            │
+        ┌───────────────┬───────────────┬───────────────┐
+        │               │               │               │
    catalog-ssr      cart-spa        profile-spa      shared libs
    storefront       shopping        user account
    SSR remote       cart remote     remote
+
+```
 
 Each remote owns its **routes, domain logic, and UI**.
 
@@ -53,7 +56,9 @@ Responsibilities:
 
 Port:
 
+```
 http://localhost:4300
+```
 
 ---
 
@@ -70,7 +75,9 @@ Responsibilities:
 
 Port:
 
+```
 http://localhost:4200
+```
 
 ---
 
@@ -86,7 +93,9 @@ Responsibilities:
 
 Port:
 
+```
 http://localhost:4201
+```
 
 ---
 
@@ -102,7 +111,9 @@ Responsibilities:
 
 Port:
 
+```
 http://localhost:4202
+```
 
 ---
 
@@ -110,6 +121,7 @@ http://localhost:4202
 
 The project is organized as an **Nx monorepo** with **apps** and **libraries**.
 
+```
 apps/
   shell-host        → application shell
   catalog-ssr       → storefront (SSR)
@@ -122,6 +134,7 @@ libs/
 
 tools/
   scripts and utilities
+```
 
 This separation allows **clear domain ownership and scalable development**.
 
@@ -133,21 +146,27 @@ The shell dynamically loads each remote via **Module Federation**.
 
 Example configuration:
 
+```ts
 initFederation({
   catalog: 'http://localhost:4200/remoteEntry.json',
   cart: 'http://localhost:4201/remoteEntry.json',
   profile: 'http://localhost:4202/remoteEntry.json'
 })
+```
 
 Routes are lazily loaded from each remote:
 
+```ts
 loadRemoteModule('catalog', './routes').then((m) => m.routes)
 loadRemoteModule('cart', './routes').then((m) => m.routes)
 loadRemoteModule('profile', './routes').then((m) => m.routes)
+```
 
 Each remote exposes its route configuration through:
 
+```
 ./remote-entry/routes.ts
+```
 
 This allows **independent development and deployment** of each micro-frontend.
 
@@ -188,11 +207,15 @@ This allows **independent development and deployment** of each micro-frontend.
 
 Start all applications in parallel:
 
+```
 npx nx run-many --target=serve --projects=catalog-ssr,cart-spa,profile-spa,shell-host --parallel=4
+```
 
 Open:
 
+```
 http://localhost:4300
+```
 
 The shell application will dynamically load the remotes.
 
@@ -226,9 +249,16 @@ Planned additions to this architecture:
 
 ---
 
-# Author Daniel Simionescu
-
-Built as part of an **Angular enterprise architecture portfolio project**.
 # Author
 
 Built as part of an **Angular enterprise architecture portfolio project**.
+
+---
+
+If you want, I can also show you **3 small additions that will massively impress recruiters**, like:
+
+- a **visual architecture diagram**
+- an **Nx dependency graph**
+- an **Architecture Decision Record (ADR)** folder
+
+These make the repo look like it came from a **real enterprise team** rather than a demo.
