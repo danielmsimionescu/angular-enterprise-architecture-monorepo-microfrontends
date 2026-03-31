@@ -1,0 +1,67 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Serve catalog-ssr",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nx", "serve", "catalog-ssr"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "serve-all"
+      }
+    },
+    {
+      "label": "Serve cart-spa",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nx", "serve", "cart-spa"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "serve-all"
+      }
+    },
+    {
+      "label": "Serve profile-spa",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nx", "serve", "profile-spa"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "serve-all"
+      }
+    },
+    {
+      "label": "Serve shell-host",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nx", "serve", "shell-host"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "serve-all"
+      }
+    },
+    {
+      "label": "Serve all apps (4 terminals)",
+      "dependsOn": [
+        "Serve catalog-ssr",
+        "Serve cart-spa",
+        "Serve profile-spa",
+        "Serve shell-host"
+      ],
+      "dependsOrder": "parallel"
+    }
+  ]
+}

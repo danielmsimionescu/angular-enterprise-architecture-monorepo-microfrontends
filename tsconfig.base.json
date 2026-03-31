@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "ui": ["libs/ui/src/index.ts"],
+      "design-system": ["libs/design-system/src/index.ts"]
+    }
+  }
+}
